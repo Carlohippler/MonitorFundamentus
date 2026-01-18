@@ -3,6 +3,7 @@
 
 #include "framework.h"
 #include "MonitorFundamentus.h"
+#include "BuscadorWeb.h" 
 
 #define MAX_LOADSTRING 100
 
