@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="MonitorFundamentus/MonitorFundamentus.vcxproj" />
+  <Project Path="MonitorFundamentus/MonitorFundamentus.vcxproj" Id="37d8efb3-cb26-4a96-863d-79f707b218f8" />
 </Solution>
