@@ -1,9 +1,10 @@
 // MonitorFundamentus.cpp : Define o ponto de entrada para o aplicativo.
 //
-
+#define CURL_STATICLIB
 #include "framework.h"
 #include "MonitorFundamentus.h"
 #include "BuscadorWeb.h" 
+#include <curl/curl.h>
 
 #define MAX_LOADSTRING 100
 
@@ -103,6 +104,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    if (!hWnd)
    {
+       MessageBox(NULL, L"Falha ao criar janela!", L"Erro Critico", MB_ICONERROR);
       return FALSE;
    }
 
