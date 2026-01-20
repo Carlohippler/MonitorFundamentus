@@ -1,12 +1,13 @@
 // MonitorFundamentus.cpp : Define o ponto de entrada para o aplicativo.
 //
-#define CURL_STATICLIB
 #include "framework.h"
 #include "MonitorFundamentus.h"
 #include "BuscadorWeb.h" 
 #include <curl/curl.h>
 
 #define MAX_LOADSTRING 100
+#define ID_EDIT_TICKER 2001
+#define ID_BTN_BUSCAR  2002
 
 // Variáveis Globais:
 HINSTANCE hInst;                                // instância atual
@@ -31,7 +32,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // Inicializar cadeias de caracteres globais
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-    LoadStringW(hInstance, IDC_MONITORFUNDAMENTUS, szWindowClass, MAX_LOADSTRING);
+    wcscpy_s(szWindowClass, L"MonitorFundamentusClasse");
+   // LoadStringW(hInstance, IDC_MONITORFUNDAMENTUS, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance);
 
     // Realize a inicialização do aplicativo:
@@ -104,7 +106,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    if (!hWnd)
    {
-       MessageBox(NULL, L"Falha ao criar janela!", L"Erro Critico", MB_ICONERROR);
+      DWORD dwError = GetLastError();
+      WCHAR msg[100];
+      swprintf(msg, 100, L"Falha ao criar janela! Erro: %lu", dwError);
+      MessageBox(NULL, msg, L"Erro Crítico", MB_ICONERROR);
       return FALSE;
    }
 
@@ -128,6 +133,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_CREATE:
+        CreateWindow(L"EDIT", L"",
+           WS_CHILD | WS_VISIBLE | WS_BORDER,
+            20, 20, 100, 25,
+            hWnd, (HMENU)ID_EDIT_TICKER, hInst, NULL);
+        break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
